@@ -1,8 +1,10 @@
 Package: com.lclrc.exacttime
 Name: ExactTime
 Depends: mobilesubstrate
-Conflicts: com.gilshahar7.exacttimemail, com.gilshahar7.exacttimephone, com.gilshahar7.exacttimemessages
-Version: 2.1.0
+Conflicts: com.gilshahar7.exacttime, com.gilshahar7.exacttimemail, com.gilshahar7.exacttimephone, com.gilshahar7.exacttimemessages
+Replaces: com.gilshahar7.exacttime, com.gilshahar7.exacttimemail, com.gilshahar7.exacttimephone, com.gilshahar7.exacttimemessages
+Provides: com.gilshahar7.exacttime (= 2.1.1)
+Version: 2.1.1
 Architecture: iphoneos-arm64e
 Description: Shows the exact time of notifications, messages, calls and emails.
 Maintainer: SquidForce

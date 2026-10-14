@@ -1,3 +1,5 @@
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 @interface UIDateLabel : UILabel
 @property (nonatomic, strong) NSDate *date;
 @end
@@ -7,13 +9,16 @@
 @end
 
 static bool is24h;
-static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.gilshahar7.exacttimeprefs.plist";
+static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.lclrc.exacttimeprefs.plist";
 static bool enabled;
 
 %hook MessageListCellView
 -(void)layoutSubviews{
 	%orig;
 	if(enabled){
+		if(!self.dateLabel || !self.dateLabel.text || !self.dateLabel.date){
+			return;
+		}
 		if(![self.dateLabel.text containsString:@":"]){
 			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 			if(is24h){
@@ -36,7 +41,8 @@ static bool enabled;
 %ctor{
 
 	NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
- 	enabled =  [[prefs objectForKey:@"mail"] boolValue];
+ 	id mailValue = [prefs objectForKey:@"mail"];
+ 	enabled = (mailValue ? [(NSNumber *)mailValue boolValue] : YES);
 
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setLocale:[NSLocale currentLocale]];

@@ -12,8 +12,8 @@
 * **Git 저장소:** `D:\llama agent\tweak\exacttime\.git`
 * **타겟 환경:** RootHide / Dopamine 3 / iOS 18.7.1 (22H31)
 * **지원 아키텍처:** `arm64`, `arm64e`
-* **현재 패키지 버전:** 2.0.3 (`com.lclrc.exacttime_2.0.3_iphoneos-arm64e.deb`)
-* **프로젝트 상태:** 분석 및 iOS 18 RootHide 수리 진행 중
+* **현재 패키지 버전:** 2.1.0 (`com.lclrc.exacttime_2.1.0_iphoneos-arm64e.deb`)
+* **프로젝트 상태:** 검증 완료 (Stable)
 
 ---
 
@@ -52,4 +52,5 @@ exacttime\
 
 | 버전 | 일자 | 변경 내역 | 결과 |
 | :--- | :--- | :--- | :--- |
+| `2.1.0` | 2026-10-14 | • RootHide 표준 경로(`/var/mobile/Library/Preferences/...`)로 전면 수정 및 설정 파일 미생성 시 기본값 YES(활성화) 폴백 적용<br>• iOS 18 전화 앱: `MPRecentsTableViewController` 훅을 통해 `CHRecentCall.date`를 셀에 `objc_setAssociatedObject`로 바인딩하여 date가 nil인 문제 해결<br>• 전화 앱 개행 잘림 방지: 한 줄 포맷(` • HH:mm` / ` • h:mm a`) 및 `numberOfLines = 1`, `sizeToFit` 적용<br>• iOS 18 메시지 앱: `_dateLabel` nil/bounds 방어 및 `sizeToFit` + 우측 여백 제약 반영하여 `...` 잘림 방지<br>• Theos iOS 16.5 SDK 호환성: UIKit/Foundation 명시적 import 및 클래스 상속 선언 수정<br>• arm64/arm64e FAT 바이너리, 순수 GNU ar 포맷 deb 패키징 완료 (SHA256: `35D1A4E2483A...`) | 정상 빌드 및 검증 완료 |
 | `2.0.3` | 2024-01-22 | 원본 패키지 (SquidForce 리패키징, iOS 18 전화/메시지 동작 불량) | 결함 확인 |

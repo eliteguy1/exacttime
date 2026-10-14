@@ -18,7 +18,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>key</key>
 			<string>notifications</string>
 			<key>label</key>
@@ -30,7 +30,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>key</key>
 			<string>messages</string>
 			<key>label</key>
@@ -42,7 +42,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>key</key>
 			<string>phone</string>
 			<key>label</key>
@@ -54,7 +54,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>key</key>
 			<string>mail</string>
 			<key>label</key>
@@ -76,7 +76,7 @@
 			<key>cell</key>
 			<string>PSEditTextCell</string>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>key</key>
 			<string>affectTime</string>
 			<key>default</key>
@@ -92,7 +92,7 @@
 			<key>cell</key>
 			<string>PSButtonCell</string>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>label</key>
 			<string>Apply</string>
 			<key>action</key>
@@ -114,7 +114,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>key</key>
 			<string>addToCurrent</string>
 			<key>label</key>
@@ -136,7 +136,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>com.gilshahar7.exacttimeprefs</string>
+			<string>com.lclrc.exacttimeprefs</string>
 			<key>key</key>
 			<string>addMinutes</string>
 			<key>label</key>

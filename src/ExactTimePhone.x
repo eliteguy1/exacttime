@@ -1,30 +1,70 @@
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <objc/runtime.h>
+
 @interface UIDateLabel : UILabel
 @property (nonatomic, strong) NSDate *date;
 @end
 
-@interface MPRecentsTableViewCell
+@interface MPRecentsTableViewCell : UITableViewCell
 @property (nonatomic, strong) UIDateLabel *callerDateLabel;
 @end
 
+@interface CHRecentCall : NSObject
+@property (nonatomic, strong) NSDate *date;
+@end
+
+@interface MPRecentsTableViewController : NSObject
+- (id)recentCallAtTableViewIndex:(NSInteger)index;
+@end
+
 static bool is24h;
-static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.gilshahar7.exacttimeprefs.plist";
+static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.lclrc.exacttimeprefs.plist";
 static bool enabled;
+static char kExactTimeCallDateKey;
+
+%hook MPRecentsTableViewController
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+	UITableViewCell *cell = %orig;
+	if(cell && [self respondsToSelector:@selector(recentCallAtTableViewIndex:)]){
+		id call = [self recentCallAtTableViewIndex:indexPath.row];
+		NSDate *callDate = nil;
+		if(call && [call respondsToSelector:@selector(date)]){
+			callDate = [call date];
+		}
+		objc_setAssociatedObject(cell, &kExactTimeCallDateKey, callDate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	}
+	return cell;
+}
+%end
 
 %hook MPRecentsTableViewCell
 -(void)layoutSubviews{
 	%orig;
 	if(enabled){
-		if(![self.callerDateLabel.text containsString:@":"]){
+		UIDateLabel *label = self.callerDateLabel;
+		if(!label || !label.text){
+			return;
+		}
+		if(![label.text containsString:@":"]){
+		NSDate *labelDate = label.date;
+		if(!labelDate){
+			labelDate = objc_getAssociatedObject(self, &kExactTimeCallDateKey);
+		}
+		if(!labelDate){
+			return;
+		}
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		if(is24h){
-			[dateFormatter setDateFormat:@"\nHH:mm"];
+			[dateFormatter setDateFormat:@" • HH:mm"];
 		}else{
-			[dateFormatter setDateFormat:@"\nh:mm a"];
+			[dateFormatter setDateFormat:@" • h:mm a"];
 		}
 
-		self.callerDateLabel.textAlignment = 2;
-		self.callerDateLabel.numberOfLines = 2;
-		self.callerDateLabel.text = [self.callerDateLabel.text stringByAppendingString:[dateFormatter stringFromDate:self.callerDateLabel.date]];
+		label.textAlignment = 2;
+		label.numberOfLines = 1;
+		label.text = [label.text stringByAppendingString:[dateFormatter stringFromDate:labelDate]];
+		[label sizeToFit];
 		}
 	}
 }
@@ -33,7 +73,8 @@ static bool enabled;
 %ctor{
 
 	NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
-	enabled =  [[prefs objectForKey:@"phone"] boolValue];
+	id phoneValue = [prefs objectForKey:@"phone"];
+	enabled = (phoneValue ? [(NSNumber *)phoneValue boolValue] : YES);
 
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 	[formatter setLocale:[NSLocale currentLocale]];

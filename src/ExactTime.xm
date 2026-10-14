@@ -1,3 +1,6 @@
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 //IOS 10
 @interface NCNotificationDateLabel
 @property (assign,nonatomic) NSString *text;
@@ -24,14 +27,15 @@
 
 
 static bool is24h;
-static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.gilshahar7.exacttimeprefs.plist";
+static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.lclrc.exacttimeprefs.plist";
 
 %group iOS10
 %hook NCLookHeaderContentView
 -(void)_updateDateLabelFontForShortLook{
   %orig;
   NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
-  bool enabled =  [[prefs objectForKey:@"notifications"] boolValue];
+  id notificationsValue = [prefs objectForKey:@"notifications"];
+  bool enabled = (notificationsValue ? [(NSNumber *)notificationsValue boolValue] : YES);
   if(enabled){
     NSDate *date = MSHookIvar<NSDate *>(self, "_date");
     NSInteger format = MSHookIvar<NSInteger >(self, "_dateFormatStyle");
@@ -122,7 +126,8 @@ static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.gilshahar7
 -(void)_updateTextAttributesForDateLabel{
   %orig;
   NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
-  bool enabled =  [[prefs objectForKey:@"notifications"] boolValue];
+  id notificationsValue = [prefs objectForKey:@"notifications"];
+  bool enabled = (notificationsValue ? [(NSNumber *)notificationsValue boolValue] : YES);
   if(enabled){
     NSDate *date = MSHookIvar<NSDate *>(self, "_date");
     NSInteger format = MSHookIvar<NSInteger >(self, "_dateFormatStyle");
@@ -213,7 +218,8 @@ static NSString *settingsPath = @"/var/mobile/Library/Preferences/com.gilshahar7
 -(void)_updateTextAttributesForDateLabel{
   %orig;
   NSMutableDictionary *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsPath];
-  bool enabled =  [[prefs objectForKey:@"notifications"] boolValue];
+  id notificationsValue = [prefs objectForKey:@"notifications"];
+  bool enabled = (notificationsValue ? [(NSNumber *)notificationsValue boolValue] : YES);
   if(enabled){
     NSDate *date = MSHookIvar<NSDate *>(self, "_date");
     NSInteger format = MSHookIvar<NSInteger >(self, "_dateFormatStyle");

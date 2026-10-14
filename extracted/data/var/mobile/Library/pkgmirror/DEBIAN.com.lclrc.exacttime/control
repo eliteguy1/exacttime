@@ -1,0 +1,13 @@
+Package: com.lclrc.exacttime
+Name: ExactTime - 给个准确时间，OK？
+Depends: mobilesubstrate
+Conflicts: com.gilshahar7.exacttimemail, com.gilshahar7.exacttimephone, com.gilshahar7.exacttimemessages
+Description: 在通知、信息、电话、邮箱中显示准确时间。Shows the exact time of notifications, messages, calls and emails.
+Maintainer: SquidForce
+Author: gilshahar7, SquidForce
+Section: Tweaks
+Icon: file:///var/jb/Library/PreferenceBundles/ExactTimeprefs.bundle/ExactTime@3x.png
+SileoDepiction: https://lclrc.github.io/repo/depictions/native/com.lclrc.exacttime/depiction.json
+Architecture: iphoneos-arm64
+Version: 2.0.3
+Installed-Size: 1116

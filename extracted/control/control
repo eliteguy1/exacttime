@@ -1,0 +1,13 @@
+Package: com.lclrc.exacttime
+Name: ExactTime【Roothide】
+Depends: mobilesubstrate
+Conflicts: com.gilshahar7.exacttimemail, com.gilshahar7.exacttimephone, com.gilshahar7.exacttimemessages
+Description: Shows the exact time of notifications, messages, calls and emails.
+Maintainer: SquidForce
+Author: gilshahar7, SquidForce
+Section: Tweaks
+Icon: file:///var/jb/Library/PreferenceBundles/ExactTimeprefs.bundle/ExactTime@3x.png
+Architecture: iphoneos-arm64e
+Version: 2.0.3
+Installed-Size: 1116
+Pre-Depends: rootless-compat(>= 0.1)

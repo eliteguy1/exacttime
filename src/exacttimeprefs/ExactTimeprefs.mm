@@ -76,7 +76,7 @@
   //From my testing, at this point we can't get the value of a specifier yet as they haven't loaded
   //Instead you can just read your switch value from your preferences file
 
-  NSDictionary *preferences = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.gilshahar7.exacttimeprefs.plist"];
+  NSDictionary *preferences = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.lclrc.exacttimeprefs.plist"];
   if(![preferences[@"notifications"] boolValue] == true) {
 		[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"96"]] animated:NO];
 		[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"97"]] animated:NO];
@@ -92,7 +92,7 @@
   [super reloadSpecifiers];
 
   //This will look the exact same as step 5, where we only check if specifiers need to be removed
-  NSDictionary *preferences = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.gilshahar7.exacttimeprefs.plist"];
+  NSDictionary *preferences = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.lclrc.exacttimeprefs.plist"];
   if([preferences[@"notifications"] boolValue] == false) {
 		[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"96"]] animated:NO];
 		[self removeContiguousSpecifiers:@[self.savedSpecifiers[@"97"]] animated:NO];
